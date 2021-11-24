@@ -1,0 +1,13 @@
+@import "elements/index.scss";
+@import "generics/index.scss";
+@import "objects/index.scss";
+@import "settings/index.scss";
+@import "trumps/index.scss";
+@import "utils/index.scss";
+@import "components/index.scss";
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

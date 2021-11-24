@@ -1,0 +1,88 @@
+.c-navbar {
+  height: 75px;
+  background-color: $darkBlue;
+  font-family: "Montserrat";
+  color: #fff;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  position: relative;
+
+  h1 {
+    font-weight: 600;
+  }
+
+  &-hamburger {
+    position: fixed;
+    right: 35px;
+    top: 35px;
+
+    &-open {
+      width: 30px;
+      height: 2px;
+      background-color: rgba(0, 0, 0, 0);
+      position: relative;
+      transition: 0.2s ease;
+
+      &::before,
+      &::after {
+        position: absolute;
+        content: "";
+        background-color: white;
+        width: 30px;
+        height: 2px;
+        transition: 0.2s ease;
+      }
+
+      &::before {
+        top: 0;
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        top: 0;
+        transform: rotate(-45deg);
+      }
+    }
+
+    &-closed {
+      width: 30px;
+      height: 2px;
+      background-color: white;
+      position: relative;
+      transition: 0.2s ease;
+
+      &::before,
+      &::after {
+        position: absolute;
+        content: "";
+        background-color: white;
+        width: 30px;
+        height: 2px;
+        transition: 0.2s ease;
+      }
+
+      &::before {
+        top: -10px;
+      }
+
+      &::after {
+        top: 10px;
+      }
+    }
+
+    &-clicker {
+      display: block;
+      position: absolute;
+      top: -17px;
+      left: -7px;
+      width: 45px;
+      height: 35px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

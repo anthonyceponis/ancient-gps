@@ -1,0 +1,57 @@
+.c-sidenav {
+  position: fixed;
+  right: 0;
+  top: 75px;
+  height: 100vh;
+  background-color: $darkBlue;
+  z-index: 9999;
+  transition: 0.5s ease;
+  overflow-x: hidden;
+
+  &-open {
+    width: 280px;
+  }
+
+  &-closed {
+    width: 0px;
+  }
+
+  div {
+    width: 280px;
+    padding: 20px;
+
+    img {
+      width: 75px;
+      margin-left: 15px;
+      margin-bottom: 15px;
+    }
+
+    ul {
+      list-style-type: none;
+      list-style-position: outside;
+
+      li {
+        padding: 5px;
+        margin: 10px;
+      }
+    }
+  }
+
+  &-hover {
+    transition: 0.2s ease;
+    padding: 5px;
+    border-radius: 7px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  &-active {
+    padding: 5px;
+    border-radius: 7px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.25);
+  }
+}
