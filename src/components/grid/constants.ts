@@ -11,7 +11,7 @@ export const GRID_TARGET_NODE_COLOR = "white";
 export const GRID_WALL_NODE_COLOR = "#f4a460";
 
 // export const BOXES_X = 75;
-export const BOX_SIZE = 25;
+export const BOX_SIZE = 26;
 export const BOXES_X = Math.floor(window.innerWidth / BOX_SIZE);
 export const BOXES_Y = Math.floor((window.innerHeight - 75) / BOX_SIZE);
 export const START_NODE = getNodeKey(

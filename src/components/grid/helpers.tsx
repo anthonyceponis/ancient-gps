@@ -14,6 +14,9 @@ import {
   GRID_TARGET_NODE_COLOR,
 } from "./constants";
 
+import Bull from "../../images/bullBlack.svg";
+import Theseus from "../../images/theseus.svg";
+
 export const drawGrid = (
   ctx: CanvasRenderingContext2D,
   rectX: number,
@@ -28,13 +31,38 @@ export const drawGrid = (
       ctx.beginPath();
       ctx.rect(x * BOX_SIZE, y * BOX_SIZE, BOX_SIZE, BOX_SIZE);
 
-      if (getNodeKey(x, y) === START_NODE)
+      if (getNodeKey(x, y) === START_NODE) {
         ctx.fillStyle = GRID_START_NODE_COLOR;
-      else if (getNodeKey(x, y) === TARGET_NODE)
+        ctx.fill();
+        const base_image = new Image();
+        base_image.src = Bull;
+        base_image.onload = function () {
+          ctx.drawImage(
+            base_image,
+            x * BOX_SIZE,
+            y * BOX_SIZE,
+            BOX_SIZE,
+            BOX_SIZE
+          );
+        };
+      } else if (getNodeKey(x, y) === TARGET_NODE) {
         ctx.fillStyle = GRID_TARGET_NODE_COLOR;
-      else ctx.fillStyle = GRID_NODE_UNVISITED_COLOR;
-
-      ctx.fill();
+        ctx.fill();
+        const base_image = new Image();
+        base_image.src = Theseus;
+        base_image.onload = function () {
+          ctx.drawImage(
+            base_image,
+            x * BOX_SIZE,
+            y * BOX_SIZE,
+            BOX_SIZE,
+            BOX_SIZE
+          );
+        };
+      } else {
+        ctx.fillStyle = GRID_NODE_UNVISITED_COLOR;
+        ctx.fill();
+      }
     }
   }
 
@@ -167,19 +195,21 @@ export const backtrace = async (
     const x = grid[backTrackNodeArray[i]].x;
     const y = grid[backTrackNodeArray[i]].y;
 
-    const animateBoxParams: IAnimateBoxFill = {
-      start: undefined,
-      previousTimestamp: undefined,
-      previousDelta: 0,
-      ctx,
-      x: x * BOX_SIZE + BOX_SIZE / 2,
-      y: y * BOX_SIZE + BOX_SIZE / 2,
-      color: GRID_NODE_SOLUTION_COLOR,
-    };
+    if (getNodeKey(x, y) !== START_NODE && getNodeKey(x, y) !== TARGET_NODE) {
+      const animateBoxParams: IAnimateBoxFill = {
+        start: undefined,
+        previousTimestamp: undefined,
+        previousDelta: 0,
+        ctx,
+        x: x * BOX_SIZE + BOX_SIZE / 2,
+        y: y * BOX_SIZE + BOX_SIZE / 2,
+        color: GRID_NODE_SOLUTION_COLOR,
+      };
 
-    requestAnimationFrame((timestamp) =>
-      animateBoxFill(timestamp, animateBoxParams)
-    );
+      requestAnimationFrame((timestamp) =>
+        animateBoxFill(timestamp, animateBoxParams)
+      );
+    }
   }
 };
 

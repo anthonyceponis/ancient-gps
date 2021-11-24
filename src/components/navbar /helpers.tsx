@@ -1,6 +1,6 @@
 import React from "react";
 import { BLOCK_SIDENAV } from "./constants";
-import Bull from "../../images/bull.svg";
+import Bull from "../../images/bullSand.svg";
 
 export const SideNav: React.FC<{ open: boolean }> = ({
   open,
@@ -55,8 +55,9 @@ export const SideNav: React.FC<{ open: boolean }> = ({
               </li>
             </ul>
           </li>
-          <li className={`${BLOCK_SIDENAV}-hover`}>Clear Board</li>
-          <li className={`${BLOCK_SIDENAV}-hover`}>Speed</li>
+          <li>
+            <span className={`${BLOCK_SIDENAV}-hover`}>Clear Board</span>
+          </li>
         </ul>
       </div>
     </div>
