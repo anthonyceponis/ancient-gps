@@ -1,0 +1,31 @@
+.c-secondary-nav {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 600px;
+
+  div {
+    color: white;
+    font-family: "Montserrat";
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+    min-width: 0;
+    padding: 15px !important;
+
+    div {
+      width: 30px;
+      height: 30px;
+      display: inline-block;
+      padding: 0 !important;
+
+      img {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+    }
+  }
+}

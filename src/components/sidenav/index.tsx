@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IStore } from "../../types";
 import { updateGridData } from "../app/actions";
 import { generateGridData } from "../grid/helpers";
+import SecondaryNav from "../secondaryNav";
 
 export const SideNav: React.FC<{
   open: boolean;
@@ -40,11 +41,12 @@ export const SideNav: React.FC<{
   return (
     <div>
       <div
-        className={`${
+        className={` ${BLOCK_SIDENAV}-backdrop ${
           open === true
             ? BLOCK_SIDENAV + "-backdrop-open"
             : BLOCK_SIDENAV + "-backdrop-closed"
         }`}
+        onClick={() => setOpen(false)}
       />
       <div
         className={`${BLOCK_SIDENAV} ${
@@ -59,11 +61,7 @@ export const SideNav: React.FC<{
               <ul>
                 <li>
                   <span
-                    className={`${BLOCK_SIDENAV}-hover ${
-                      algorithm === ALGORITHM_BFS
-                        ? BLOCK_SIDENAV + "-active"
-                        : ""
-                    }`}
+                    className={`${BLOCK_SIDENAV}-hover`}
                     onClick={() => {
                       dispatch(toggleVisualisingAlgorithm());
                       dispatch(setAlgorithm(ALGORITHM_BFS));
@@ -75,11 +73,7 @@ export const SideNav: React.FC<{
                 </li>
                 <li>
                   <span
-                    className={`${BLOCK_SIDENAV}-hover  ${
-                      algorithm === ALGORITHM_DFS
-                        ? BLOCK_SIDENAV + "-active"
-                        : ""
-                    }`}
+                    className={`${BLOCK_SIDENAV}-hover`}
                     onClick={() => {
                       dispatch(toggleVisualisingAlgorithm());
                       dispatch(setAlgorithm(ALGORITHM_DFS));
@@ -96,9 +90,7 @@ export const SideNav: React.FC<{
               <ul>
                 <li>
                   <span
-                    className={`${BLOCK_SIDENAV}-hover ${
-                      maze === null ? BLOCK_SIDENAV + "-active" : ""
-                    }`}
+                    className={`${BLOCK_SIDENAV}-hover`}
                     onClick={() => {
                       dispatch(setMaze(null));
                       dispatch(updateGridData(generateGridData()));
@@ -109,14 +101,11 @@ export const SideNav: React.FC<{
                 </li>
                 <li>
                   <span
-                    className={`${BLOCK_SIDENAV}-hover ${
-                      maze === MAZE_RECURSIVE_DIVISION
-                        ? BLOCK_SIDENAV + "-active"
-                        : ""
-                    }`}
+                    className={`${BLOCK_SIDENAV}-hover`}
                     onClick={() => {
                       dispatch(toggleVisualisingMaze());
                       dispatch(setAlgorithm(null));
+                      dispatch(updateGridData(generateGridData()));
                       dispatch(setMaze(MAZE_RECURSIVE_DIVISION));
                       setOpen(false);
                     }}
@@ -173,6 +162,7 @@ export const SideNav: React.FC<{
             </li>
           </ul>
         </div>
+        <SecondaryNav />
       </div>
     </div>
   );

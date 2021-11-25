@@ -1,6 +1,6 @@
 .c-navbar {
   height: 75px;
-  background-color: $darkBlue;
+  background-color: black;
   font-family: "Montserrat";
   color: #fff;
   padding: 25px;
@@ -11,6 +11,9 @@
 
   h1 {
     font-weight: 500;
+    position: fixed;
+    left: 20px;
+    top: 20px;
   }
 
   &-hamburger {

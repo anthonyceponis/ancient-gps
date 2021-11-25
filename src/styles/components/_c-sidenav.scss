@@ -3,13 +3,12 @@
   right: 0;
   top: 75px;
   height: 100vh;
-  background-color: $darkBlue;
+  background-color: black;
   z-index: 9999;
   transition: 0.5s ease;
   overflow-x: hidden;
 
-  &-backdrop-open {
-    background-color: rgba(0, 0, 0, 0.75);
+  &-backdrop {
     transition: 0.2s ease;
     pointer-events: auto;
     position: fixed;
@@ -18,18 +17,14 @@
     z-index: 9998;
     width: 100vw;
     height: 100vh;
-  }
 
-  &-backdrop-close {
-    background-color: rgba(0, 0, 0, 0);
-    transition: 0.2s ease;
-    pointer-events: none;
-    position: fixed;
-    top: 75px;
-    left: 0;
-    z-index: 9998;
-    width: 100vw;
-    height: 100vh;
+    &-open {
+      background-color: rgba(255, 255, 255, 0.25);
+    }
+
+    &-close {
+      background-color: rgba(255, 255, 255, 0);
+    }
   }
 
   &-open {
