@@ -19,6 +19,7 @@ export const recursiveDivision = async ({
   colEnd,
   split,
   surroundingWalls,
+  speed,
   ctx,
 }: {
   grid: IGrid;
@@ -28,6 +29,7 @@ export const recursiveDivision = async ({
   colEnd: number;
   split: string;
   surroundingWalls: boolean;
+  speed: number;
   ctx: CanvasRenderingContext2D;
 }) => {
   if (rowEnd < rowStart || colEnd < colStart) {
@@ -50,9 +52,9 @@ export const recursiveDivision = async ({
           color: GRID_WALL_NODE_COLOR,
         };
 
-        await delay(1);
+        await delay(speed);
         requestAnimationFrame((timestamp) =>
-          animateBoxFill(timestamp, animateBoxParams)
+          animateBoxFill(speed, timestamp, animateBoxParams)
         );
       }
     }
@@ -94,9 +96,9 @@ export const recursiveDivision = async ({
           color: GRID_WALL_NODE_COLOR,
         };
 
-        await delay(1);
+        await delay(speed);
         requestAnimationFrame((timestamp) =>
-          animateBoxFill(timestamp, animateBoxParams)
+          animateBoxFill(speed, timestamp, animateBoxParams)
         );
       }
     }
@@ -109,6 +111,7 @@ export const recursiveDivision = async ({
         colEnd,
         split,
         surroundingWalls,
+        speed,
         ctx,
       });
     } else {
@@ -120,6 +123,7 @@ export const recursiveDivision = async ({
         colEnd,
         split: "vertical",
         surroundingWalls,
+        speed,
         ctx,
       });
     }
@@ -132,6 +136,7 @@ export const recursiveDivision = async ({
         colEnd,
         split,
         surroundingWalls,
+        speed,
         ctx,
       });
     } else {
@@ -143,6 +148,7 @@ export const recursiveDivision = async ({
         colEnd,
         split: "vertical",
         surroundingWalls,
+        speed,
         ctx,
       });
     }
@@ -181,9 +187,9 @@ export const recursiveDivision = async ({
           color: GRID_WALL_NODE_COLOR,
         };
 
-        await delay(1);
+        await delay(speed);
         requestAnimationFrame((timestamp) =>
-          animateBoxFill(timestamp, animateBoxParams)
+          animateBoxFill(speed, timestamp, animateBoxParams)
         );
       }
     }
@@ -196,6 +202,7 @@ export const recursiveDivision = async ({
         colEnd: currentCol - 2,
         split: "horizontal",
         surroundingWalls,
+        speed,
         ctx,
       });
     } else {
@@ -207,6 +214,7 @@ export const recursiveDivision = async ({
         colEnd: currentCol - 2,
         split,
         surroundingWalls,
+        speed,
         ctx,
       });
     }
@@ -219,6 +227,7 @@ export const recursiveDivision = async ({
         colEnd,
         split: "horizontal",
         surroundingWalls,
+        speed,
         ctx,
       });
     } else {
@@ -230,6 +239,7 @@ export const recursiveDivision = async ({
         colEnd,
         split,
         surroundingWalls,
+        speed,
         ctx,
       });
     }

@@ -72,6 +72,15 @@
       }
     }
 
+    &-visualising {
+      background-color: $red;
+
+      &::before,
+      &::after {
+        background-color: red;
+      }
+    }
+
     &-clicker {
       display: block;
       position: absolute;
@@ -79,10 +88,6 @@
       left: -7px;
       width: 45px;
       height: 35px;
-
-      &:hover {
-        cursor: pointer;
-      }
     }
   }
 }

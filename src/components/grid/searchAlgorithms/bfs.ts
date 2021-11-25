@@ -12,6 +12,7 @@ import { animateBoxFill, delay, backtrace } from "../helpers";
 export const bfs = async (
   start: string,
   grid: IGrid,
+  speed: number,
   ctx: CanvasRenderingContext2D
 ) => {
   const queue = [start];
@@ -19,7 +20,7 @@ export const bfs = async (
 
   while (queue.length > 0) {
     // delay to make the animation more visually pleasing
-    await delay(10);
+    await delay(speed);
     const front = queue[0];
     const x = grid[front].x;
     const y = grid[front].y;
@@ -36,13 +37,13 @@ export const bfs = async (
       };
 
       requestAnimationFrame((timestamp) =>
-        animateBoxFill(timestamp, animateBoxParams)
+        animateBoxFill(speed, timestamp, animateBoxParams)
       );
     }
 
     if (front === TARGET_NODE) {
       grid[START_NODE].parent = null;
-      return backtrace(front, grid, ctx);
+      return backtrace(front, grid, speed, ctx);
     }
 
     for (const node of grid[front].nodes)

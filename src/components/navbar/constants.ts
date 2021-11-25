@@ -1,5 +1,3 @@
-import { IAppStore } from "../app/types";
-import { generateGridData } from "../grid/helpers";
 import { INavStore } from "./types";
 
 export const BLOCK_NAVBAR = "c-navbar";
@@ -16,12 +14,22 @@ export const ALGORITHMA_STAR = "ALGORITHMA_STAR";
 
 export const MAZE_RECURSIVE_DIVISION = "MAZE_RECURSIVE_DIVISION";
 
-export const SPEED_FAST = 2;
-export const SPEED_MODERATE = 1;
-export const SPEED_SLOW = 0.5;
+export const SPEED_FAST = 1;
+export const SPEED_MODERATE = 10;
+export const SPEED_SLOW = 30;
+
+export const TOGGLE_VISUALISING = "TOGGLE_VISUALISING";
+
+let algorithm = localStorage.getItem("algorithm");
+if (algorithm === "") algorithm = null;
+let maze = localStorage.getItem("maze");
+if (maze === "") maze = null;
+let speed: string | null = localStorage.getItem("speed");
+if (speed === null) speed = SPEED_MODERATE.toString();
 
 export const initialState: INavStore = {
-  algorithm: ALGORITHM_BFS,
-  maze: null,
-  speed: SPEED_MODERATE,
+  algorithm: algorithm,
+  maze: maze,
+  speed: parseInt(speed),
+  visualising: false,
 };

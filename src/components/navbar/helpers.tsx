@@ -9,14 +9,19 @@ import {
   SPEED_SLOW,
 } from "./constants";
 import Bull from "../../images/bullSand.svg";
-import { setAlgorithm, setMaze, setSpeed } from "./actions";
+import { setAlgorithm, setMaze, setSpeed, toggleVisualising } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 import { IStore } from "../../types";
 
-export const SideNav: React.FC<{ open: boolean }> = ({
+export const SideNav: React.FC<{
+  open: boolean;
+  setOpen: React.Dispatch<boolean>;
+}> = ({
   open,
+  setOpen,
 }: {
   open: boolean;
+  setOpen: React.Dispatch<boolean>;
 }) => {
   const algorithm = useSelector(({ Navbar }: IStore) => Navbar.algorithm);
   const maze = useSelector(({ Navbar }: IStore) => Navbar.maze);
@@ -41,7 +46,11 @@ export const SideNav: React.FC<{ open: boolean }> = ({
                   className={`${BLOCK_SIDENAV}-hover ${
                     algorithm === ALGORITHM_BFS ? BLOCK_SIDENAV + "-active" : ""
                   }`}
-                  onClick={() => dispatch(setAlgorithm(ALGORITHM_BFS))}
+                  onClick={() => {
+                    dispatch(toggleVisualising());
+                    dispatch(setAlgorithm(ALGORITHM_BFS));
+                    setOpen(false);
+                  }}
                 >
                   Breadth-first search
                 </span>
@@ -51,7 +60,11 @@ export const SideNav: React.FC<{ open: boolean }> = ({
                   className={`${BLOCK_SIDENAV}-hover  ${
                     algorithm === ALGORITHM_DFS ? BLOCK_SIDENAV + "-active" : ""
                   }`}
-                  onClick={() => dispatch(setAlgorithm(ALGORITHM_DFS))}
+                  onClick={() => {
+                    dispatch(toggleVisualising());
+                    dispatch(setAlgorithm(ALGORITHM_DFS));
+                    setOpen(false);
+                  }}
                 >
                   Depth-first search
                 </span>
@@ -64,11 +77,31 @@ export const SideNav: React.FC<{ open: boolean }> = ({
               <li>
                 <span
                   className={`${BLOCK_SIDENAV}-hover ${
+                    maze === null ? BLOCK_SIDENAV + "-active" : ""
+                  }`}
+                  onClick={() => {
+                    dispatch(toggleVisualising());
+                    dispatch(setAlgorithm(null));
+                    dispatch(setMaze(null));
+                    setOpen(false);
+                  }}
+                >
+                  No Maze
+                </span>
+              </li>
+              <li>
+                <span
+                  className={`${BLOCK_SIDENAV}-hover ${
                     maze === MAZE_RECURSIVE_DIVISION
                       ? BLOCK_SIDENAV + "-active"
                       : ""
                   }`}
-                  onClick={() => dispatch(setMaze(MAZE_RECURSIVE_DIVISION))}
+                  onClick={() => {
+                    dispatch(toggleVisualising());
+                    dispatch(setAlgorithm(null));
+                    dispatch(setMaze(MAZE_RECURSIVE_DIVISION));
+                    setOpen(false);
+                  }}
                 >
                   Recursive Division
                 </span>
@@ -109,6 +142,14 @@ export const SideNav: React.FC<{ open: boolean }> = ({
                 </span>
               </li>
             </ul>
+          </li>
+          <li>
+            <span
+              className={`${BLOCK_SIDENAV}-hover `}
+              onClick={() => window.location.reload()}
+            >
+              Clear Board
+            </span>
           </li>
         </ul>
       </div>

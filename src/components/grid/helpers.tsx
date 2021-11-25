@@ -142,6 +142,7 @@ export const delay = (ms: number) => {
 };
 
 export const animateBoxFill = (
+  speed: number,
   timestamp: number,
   { start, previousTimestamp, previousDelta, ctx, x, y, color }: IAnimateBoxFill
 ) => {
@@ -163,7 +164,7 @@ export const animateBoxFill = (
     ctx.fillRect(x - delta / 2, y - delta / 2, delta, delta);
   }
 
-  if (elapsed < 5000) {
+  if (elapsed < speed * 1000) {
     previousTimestamp = timestamp;
     const animateBoxParams: IAnimateBoxFill = {
       start,
@@ -175,7 +176,7 @@ export const animateBoxFill = (
       color,
     };
     requestAnimationFrame((timestamp) =>
-      animateBoxFill(timestamp, animateBoxParams)
+      animateBoxFill(speed, timestamp, animateBoxParams)
     );
   }
 };
@@ -183,6 +184,7 @@ export const animateBoxFill = (
 export const backtrace = async (
   currentNode: string | null,
   grid: IGrid,
+  speed: number,
   ctx: CanvasRenderingContext2D
 ) => {
   const backTrackNodeArray = [];
@@ -191,7 +193,7 @@ export const backtrace = async (
     currentNode = grid[currentNode].parent as string | null;
   }
   for (let i = backTrackNodeArray.length - 1; i >= 0; --i) {
-    // await delay(2);
+    await delay(speed);
     const x = grid[backTrackNodeArray[i]].x;
     const y = grid[backTrackNodeArray[i]].y;
 
@@ -207,7 +209,7 @@ export const backtrace = async (
       };
 
       requestAnimationFrame((timestamp) =>
-        animateBoxFill(timestamp, animateBoxParams)
+        animateBoxFill(speed, timestamp, animateBoxParams)
       );
     }
   }

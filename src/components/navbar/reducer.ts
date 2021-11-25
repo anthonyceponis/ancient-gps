@@ -1,5 +1,11 @@
 import { AnyAction } from "redux";
-import { initialState, SET_ALGORITHM, SET_MAZE, SET_SPEED } from "./constants";
+import {
+  initialState,
+  SET_ALGORITHM,
+  SET_MAZE,
+  SET_SPEED,
+  TOGGLE_VISUALISING,
+} from "./constants";
 
 const reducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
@@ -11,6 +17,9 @@ const reducer = (state = initialState, action: AnyAction) => {
     }
     case SET_SPEED: {
       return { ...state, speed: action.payload };
+    }
+    case TOGGLE_VISUALISING: {
+      return { ...state, visualising: !state.visualising };
     }
     default:
       return state;
