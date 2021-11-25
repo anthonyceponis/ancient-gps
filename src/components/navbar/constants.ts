@@ -18,7 +18,8 @@ export const SPEED_FAST = 1;
 export const SPEED_MODERATE = 10;
 export const SPEED_SLOW = 30;
 
-export const TOGGLE_VISUALISING = "TOGGLE_VISUALISING";
+export const TOGGLE_VISUALISING_ALGORITHM = "TOGGLE_VISUALISING_ALGORITHM";
+export const TOGGLE_VISUALISING_MAZE = "TOGGLE_VISUALISING_MAZE";
 
 let algorithm = localStorage.getItem("algorithm");
 if (algorithm === "") algorithm = null;
@@ -31,5 +32,6 @@ export const initialState: INavStore = {
   algorithm: algorithm,
   maze: maze,
   speed: parseInt(speed),
-  visualising: false,
+  visualisingAlgorithm: false,
+  visualisingMaze: false,
 };

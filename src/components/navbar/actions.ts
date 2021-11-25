@@ -3,7 +3,8 @@ import {
   SET_ALGORITHM,
   SET_MAZE,
   SET_SPEED,
-  TOGGLE_VISUALISING,
+  TOGGLE_VISUALISING_ALGORITHM,
+  TOGGLE_VISUALISING_MAZE,
 } from "./constants";
 
 export const setAlgorithm =
@@ -22,6 +23,10 @@ export const setSpeed = (speed: number) => (dispatch: Dispatch) => {
   dispatch({ type: SET_SPEED, payload: speed });
 };
 
-export const toggleVisualising = () => (dispatch: Dispatch) => {
-  dispatch({ type: TOGGLE_VISUALISING, payload: null });
+export const toggleVisualisingAlgorithm = () => (dispatch: Dispatch) => {
+  dispatch({ type: TOGGLE_VISUALISING_ALGORITHM, payload: null });
+};
+
+export const toggleVisualisingMaze = () => (dispatch: Dispatch) => {
+  dispatch({ type: TOGGLE_VISUALISING_MAZE, payload: null });
 };

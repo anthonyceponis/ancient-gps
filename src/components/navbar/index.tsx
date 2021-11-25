@@ -6,7 +6,12 @@ import { SideNav } from "./helpers";
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const visualising = useSelector(({ Navbar }: IStore) => Navbar.visualising);
+  const visualisingAlgorithm = useSelector(
+    ({ Navbar }: IStore) => Navbar.visualisingAlgorithm
+  );
+  const visualisingMaze = useSelector(
+    ({ Navbar }: IStore) => Navbar.visualisingMaze
+  );
 
   return (
     <div className={BLOCK_NAVBAR}>
@@ -17,13 +22,19 @@ const Navbar: React.FC = () => {
         <div
           className={`${BLOCK_NAVBAR}-hamburger-${
             open ? "open" : "closed"
-          } ${BLOCK_NAVBAR}-hamburger-${visualising ? "visualising" : ""}`}
+          } ${BLOCK_NAVBAR}-hamburger-${
+            visualisingAlgorithm || visualisingMaze ? "visualising" : ""
+          }`}
         />
         <span
           className={`${BLOCK_NAVBAR}-hamburger-clicker`}
-          style={{ cursor: visualising ? "not-allowed" : "pointer" }}
+          style={{
+            pointerEvents:
+              visualisingAlgorithm || visualisingMaze ? "none" : "auto",
+          }}
           onClick={() => {
-            if (!open && !visualising) setOpen(true);
+            if ((!open && !visualisingAlgorithm) || visualisingMaze)
+              setOpen(true);
             else if (open) setOpen(false);
           }}
         ></span>

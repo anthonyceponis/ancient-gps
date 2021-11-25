@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: $darkBlue;
+}
+
 .c-main {
   display: flex;
 }

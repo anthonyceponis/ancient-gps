@@ -6,5 +6,6 @@ export interface INavStore {
   algorithm: string | null;
   maze: string | null;
   speed: number;
-  visualising: boolean;
+  visualisingAlgorithm: boolean;
+  visualisingMaze: boolean;
 }

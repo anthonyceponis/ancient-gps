@@ -17,11 +17,7 @@ import {
 import Bull from "../../images/bullBlack.svg";
 import Theseus from "../../images/theseus.svg";
 
-export const drawGrid = (
-  ctx: CanvasRenderingContext2D,
-  rectX: number,
-  rectY: number
-) => {
+export const drawGrid = (ctx: CanvasRenderingContext2D) => {
   ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
   // populates the grid with squares

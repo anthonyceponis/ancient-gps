@@ -4,7 +4,8 @@ import {
   SET_ALGORITHM,
   SET_MAZE,
   SET_SPEED,
-  TOGGLE_VISUALISING,
+  TOGGLE_VISUALISING_ALGORITHM,
+  TOGGLE_VISUALISING_MAZE,
 } from "./constants";
 
 const reducer = (state = initialState, action: AnyAction) => {
@@ -18,8 +19,11 @@ const reducer = (state = initialState, action: AnyAction) => {
     case SET_SPEED: {
       return { ...state, speed: action.payload };
     }
-    case TOGGLE_VISUALISING: {
-      return { ...state, visualising: !state.visualising };
+    case TOGGLE_VISUALISING_ALGORITHM: {
+      return { ...state, visualisingAlgorithm: !state.visualisingAlgorithm };
+    }
+    case TOGGLE_VISUALISING_MAZE: {
+      return { ...state, visualisingMaze: !state.visualisingMaze };
     }
     default:
       return state;

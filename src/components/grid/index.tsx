@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IStore } from "../../types";
 
@@ -19,7 +19,10 @@ import {
   ALGORITHM_DFS,
   MAZE_RECURSIVE_DIVISION,
 } from "../navbar/constants";
-import { toggleVisualising } from "../navbar/actions";
+import {
+  toggleVisualisingAlgorithm,
+  toggleVisualisingMaze,
+} from "../navbar/actions";
 
 const Grid: React.FC = () => {
   const canvasRef = useRef(null);
@@ -28,9 +31,20 @@ const Grid: React.FC = () => {
   const algorithm = useSelector(({ Navbar }: IStore) => Navbar.algorithm);
   const maze = useSelector(({ Navbar }: IStore) => Navbar.maze);
   const speed = useSelector(({ Navbar }: IStore) => Navbar.speed);
-  const visualising = useSelector(({ Navbar }: IStore) => Navbar.visualising);
+  const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
+  const visualisingAlgorithm = useSelector(
+    ({ Navbar }: IStore) => Navbar.visualisingAlgorithm
+  );
+  const visualisingMaze = useSelector(
+    ({ Navbar }: IStore) => Navbar.visualisingMaze
+  );
 
   const dispatch = useDispatch();
+
+  // Listens for clearing the board
+  useEffect(() => {
+    if (ctx) drawGrid(ctx);
+  }, [gridData, ctx]);
 
   useEffect(() => {
     if (canvasRef.current === null) return;
@@ -42,7 +56,9 @@ const Grid: React.FC = () => {
       "2d"
     ) as CanvasRenderingContext2D;
 
-    drawGrid(ctx, 9999, 9999);
+    drawGrid(ctx);
+
+    setCtx(ctx);
 
     // recursiveBacktracking(START_NODE, gridData, ctx, new Set<string>());
     // recursiveDivision(START_NODE, gridData, ctx, new Set<string>());
@@ -52,7 +68,7 @@ const Grid: React.FC = () => {
     // });
 
     window.addEventListener("resize", (e) => {
-      drawGrid(ctx, 9999, 9999);
+      drawGrid(ctx);
     });
 
     return () => {
@@ -60,39 +76,34 @@ const Grid: React.FC = () => {
       //   listenForCanvasHover(e, ctx, gridData);
       // });
       window.removeEventListener("resize", (e) => {
-        drawGrid(ctx, 9999, 9999);
+        drawGrid(ctx);
       });
     };
   }, []);
 
   useEffect(() => {
-    if (canvasRef.current === null || !visualising) return;
-    const canvas: HTMLCanvasElement = canvasRef.current;
-    canvas.width = BOXES_X * BOX_SIZE;
-    canvas.height = BOXES_Y * BOX_SIZE;
-
-    const ctx: CanvasRenderingContext2D = canvas.getContext(
-      "2d"
-    ) as CanvasRenderingContext2D;
-
-    drawGrid(ctx, 9999, 9999);
+    if (ctx === null || !visualisingAlgorithm) return;
 
     switch (algorithm) {
       case ALGORITHM_BFS: {
         bfs(START_NODE, gridData, speed, ctx).then(() =>
-          dispatch(toggleVisualising())
+          dispatch(toggleVisualisingAlgorithm())
         );
         break;
       }
       case ALGORITHM_DFS: {
         dfs(START_NODE, gridData, ctx, speed, new Set<string>()).then(() =>
-          dispatch(toggleVisualising())
+          dispatch(toggleVisualisingAlgorithm())
         );
         break;
       }
       default:
         break;
     }
+  }, [algorithm, maze, dispatch, gridData, speed, visualisingAlgorithm, ctx]);
+
+  useEffect(() => {
+    if (ctx === null || !visualisingMaze) return;
 
     switch (maze) {
       case MAZE_RECURSIVE_DIVISION: {
@@ -106,13 +117,13 @@ const Grid: React.FC = () => {
           surroundingWalls: false,
           speed,
           ctx,
-        }).then(() => dispatch(toggleVisualising()));
+        }).then(() => dispatch(toggleVisualisingMaze()));
         break;
       }
       default:
         break;
     }
-  }, [algorithm, maze, dispatch, gridData, speed, visualising]);
+  }, [algorithm, maze, dispatch, gridData, speed, visualisingMaze, ctx]);
 
   return <canvas className={`${BLOCK_GRID}`} ref={canvasRef} />;
 };
