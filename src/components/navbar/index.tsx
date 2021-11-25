@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { IStore } from "../../types";
 import { BLOCK_NAVBAR } from "./constants";
-import { SideNav } from "./helpers";
+import { SideNav } from "../sidenav/index";
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState<boolean>(false);

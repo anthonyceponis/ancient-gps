@@ -7,7 +7,7 @@ import {
   SPEED_MODERATE,
   SPEED_FAST,
   SPEED_SLOW,
-} from "./constants";
+} from "../navbar/constants";
 import Bull from "../../images/bullSand.svg";
 import {
   setAlgorithm,
@@ -15,7 +15,7 @@ import {
   setSpeed,
   toggleVisualisingAlgorithm,
   toggleVisualisingMaze,
-} from "./actions";
+} from "../navbar/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { IStore } from "../../types";
 import { updateGridData } from "../app/actions";
