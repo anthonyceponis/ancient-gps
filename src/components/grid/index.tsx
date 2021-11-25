@@ -11,9 +11,9 @@ import {
 } from "./constants";
 import { drawGrid } from "./helpers";
 import { IGrid } from "./types";
-import { bfs } from "./algorithms/bfs";
-import { dfs } from "./algorithms/dfs";
-import { recursiveDivision } from "./algorithms/recursiveDivision";
+import { bfs } from "./searchAlgorithms/bfs";
+import { dfs } from "./searchAlgorithms/dfs";
+import { recursiveDivision } from "./mazeAlgorithms/recursiveDivision";
 
 const Grid: React.FC = () => {
   const canvasRef = useRef(null);
