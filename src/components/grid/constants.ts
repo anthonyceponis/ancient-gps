@@ -17,14 +17,8 @@ const getNodeKey = (x: number, y: number): string => {
   return `x${x},y${y}`;
 };
 
-export const START_NODE = getNodeKey(
-  Math.floor(BOXES_X / 3),
-  Math.floor(BOXES_Y / 2)
-);
-export const TARGET_NODE = getNodeKey(
-  Math.ceil((BOXES_X / 3) * 2),
-  Math.floor(BOXES_Y / 2)
-);
+export const START_NODE = getNodeKey(5, Math.floor(BOXES_Y / 2));
+export const TARGET_NODE = getNodeKey(BOXES_X - 5, Math.floor(BOXES_Y / 2));
 
 export enum NODE_LABELS {
   UNVISISTED,

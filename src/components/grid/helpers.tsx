@@ -12,12 +12,33 @@ import {
   START_NODE,
   GRID_START_NODE_COLOR,
   GRID_TARGET_NODE_COLOR,
+  GRID_WALL_NODE_COLOR,
 } from "./constants";
 
 import Bull from "../../images/bullBlack.svg";
 import Theseus from "../../images/theseus.svg";
 
-export const drawGrid = (ctx: CanvasRenderingContext2D) => {
+export const drawGrid = ({
+  ctx,
+  x = Infinity,
+  y = Infinity,
+  wall = null,
+}: {
+  ctx: CanvasRenderingContext2D;
+  x?: number;
+  y?: number;
+  wall?: boolean | null;
+}) => {
+  if (x !== Infinity) {
+    if (wall !== null) {
+      ctx.beginPath();
+      ctx.rect(x + 1, y + 1, BOX_SIZE - 2, BOX_SIZE - 2);
+      ctx.fillStyle = wall ? GRID_WALL_NODE_COLOR : GRID_NODE_UNVISITED_COLOR;
+      ctx.fill();
+    }
+    return;
+  }
+
   ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
   // populates the grid with squares
@@ -235,25 +256,77 @@ export function getRandomInt(max: number) {
   return Math.floor(Math.random() * max);
 }
 
-// export const listenForCanvasHover = (
-//   e: MouseEvent,
-//   ctx: CanvasRenderingContext2D,
-//   grid: IGrid
-// ) => {
-//   let rect = (
-//       document.querySelector("body") as HTMLBodyElement
-//     ).getBoundingClientRect(),
-//     rectX = e.clientX - rect.left,
-//     rectY =
-//       e.clientY -
-//       rect.top -
-//       parseInt(
-//         window
-//           .getComputedStyle(
-//             document.querySelector(".c-navbar") as HTMLDivElement
-//           )
-//           .height.split("px")[0]
-//       );
+export const listenForCanvasHover = (
+  e: MouseEvent,
+  ctx: CanvasRenderingContext2D,
+  grid: IGrid
+) => {
+  const canvas = document.querySelector("canvas") as HTMLCanvasElement;
 
-//   drawGrid(ctx, grid, rectX, rectY);
-// };
+  var rect = canvas.getBoundingClientRect(), // abs. size of element
+    scaleX = canvas.width / rect.width, // relationship bitmap vs. element for X
+    scaleY = canvas.height / rect.height; // relationship bitmap vs. element for Y
+
+  const coordinates = {
+    x:
+      (e.clientX - rect.left) * scaleX -
+      (((e.clientX - rect.left) * scaleX) % BOX_SIZE),
+    y:
+      (e.clientY - rect.top) * scaleY -
+      (((e.clientY - rect.top) * scaleY) % BOX_SIZE),
+  };
+
+  let wall = null;
+  if (e.shiftKey) wall = true;
+  else if (e.ctrlKey) wall = false;
+
+  if (wall !== null && grid) {
+    const currentNodeKey = getNodeKey(
+      coordinates.x / BOX_SIZE,
+      coordinates.y / BOX_SIZE
+    );
+    if (currentNodeKey === START_NODE || currentNodeKey === TARGET_NODE) return;
+    grid[currentNodeKey].label = wall
+      ? NODE_LABELS.WALL
+      : NODE_LABELS.UNVISISTED;
+  }
+
+  drawGrid({ ctx, x: coordinates.x, y: coordinates.y, wall });
+};
+
+export const listenForCanvasClick = (
+  e: MouseEvent,
+  ctx: CanvasRenderingContext2D,
+  grid: IGrid
+) => {
+  const canvas = document.querySelector("canvas") as HTMLCanvasElement;
+
+  var rect = canvas.getBoundingClientRect(), // abs. size of element
+    scaleX = canvas.width / rect.width, // relationship bitmap vs. element for X
+    scaleY = canvas.height / rect.height; // relationship bitmap vs. element for Y
+
+  const coordinates = {
+    x:
+      (e.clientX - rect.left) * scaleX -
+      (((e.clientX - rect.left) * scaleX) % BOX_SIZE),
+    y:
+      (e.clientY - rect.top) * scaleY -
+      (((e.clientY - rect.top) * scaleY) % BOX_SIZE),
+  };
+
+  let wall = null;
+
+  if (grid) {
+    const currentNodeKey = getNodeKey(
+      coordinates.x / BOX_SIZE,
+      coordinates.y / BOX_SIZE
+    );
+    if (currentNodeKey === START_NODE || currentNodeKey === TARGET_NODE) return;
+    wall = grid[currentNodeKey].label === NODE_LABELS.UNVISISTED;
+    grid[currentNodeKey].label = wall
+      ? NODE_LABELS.WALL
+      : NODE_LABELS.UNVISISTED;
+  }
+
+  drawGrid({ ctx, x: coordinates.x, y: coordinates.y, wall });
+};

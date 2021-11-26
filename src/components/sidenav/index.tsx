@@ -7,6 +7,7 @@ import {
   SPEED_MODERATE,
   SPEED_FAST,
   SPEED_SLOW,
+  MAZE_STAIR,
 } from "../navbar/constants";
 import Bull from "../../images/bullSand.svg";
 import {
@@ -40,14 +41,6 @@ export const SideNav: React.FC<{
 
   return (
     <div>
-      <div
-        className={` ${BLOCK_SIDENAV}-backdrop ${
-          open === true
-            ? BLOCK_SIDENAV + "-backdrop-open"
-            : BLOCK_SIDENAV + "-backdrop-closed"
-        }`}
-        onClick={() => setOpen(false)}
-      />
       <div
         className={`${BLOCK_SIDENAV} ${
           open === true ? BLOCK_SIDENAV + "-open" : BLOCK_SIDENAV + "-closed"
@@ -112,6 +105,31 @@ export const SideNav: React.FC<{
                   >
                     Recursive Division
                   </span>
+                </li>
+                <li>
+                  <span
+                    className={`${BLOCK_SIDENAV}-hover`}
+                    onClick={() => {
+                      dispatch(toggleVisualisingMaze());
+                      dispatch(setAlgorithm(null));
+                      dispatch(updateGridData(generateGridData()));
+                      dispatch(setMaze(MAZE_STAIR));
+                      setOpen(false);
+                    }}
+                  >
+                    Stair Pattern
+                  </span>
+                </li>
+                <li>
+                  <b>Add wall: </b> <br /> hover + shiftKey
+                </li>
+                <li>
+                  <b>Remove wall: </b>
+                  <br /> hover + ctrlKey
+                </li>
+                <li>
+                  <b>Toggle wall: </b>
+                  <br /> click
                 </li>
               </ul>
             </li>

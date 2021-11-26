@@ -9,7 +9,11 @@ import {
   BOX_SIZE,
   START_NODE,
 } from "./constants";
-import { drawGrid } from "./helpers";
+import {
+  drawGrid,
+  listenForCanvasClick,
+  listenForCanvasHover,
+} from "./helpers";
 import { IGrid } from "./types";
 import { bfs } from "./searchAlgorithms/bfs";
 import { dfs } from "./searchAlgorithms/dfs";
@@ -18,11 +22,13 @@ import {
   ALGORITHM_BFS,
   ALGORITHM_DFS,
   MAZE_RECURSIVE_DIVISION,
+  MAZE_STAIR,
 } from "../navbar/constants";
 import {
   toggleVisualisingAlgorithm,
   toggleVisualisingMaze,
 } from "../navbar/actions";
+import stairPattern from "./mazeAlgorithms/stairPattern";
 
 const Grid: React.FC = () => {
   const canvasRef = useRef(null);
@@ -43,7 +49,7 @@ const Grid: React.FC = () => {
 
   // Listens for clearing the board
   useEffect(() => {
-    if (ctx) drawGrid(ctx);
+    if (ctx) drawGrid({ ctx });
   }, [gridData, ctx]);
 
   useEffect(() => {
@@ -56,30 +62,18 @@ const Grid: React.FC = () => {
       "2d"
     ) as CanvasRenderingContext2D;
 
-    drawGrid(ctx);
+    drawGrid({ ctx });
 
     setCtx(ctx);
 
-    // recursiveBacktracking(START_NODE, gridData, ctx, new Set<string>());
-    // recursiveDivision(START_NODE, gridData, ctx, new Set<string>());
-
-    // canvas.addEventListener("mousemove", (e) => {
-    //   listenForCanvasHover(e, ctx, gridData);
-    // });
-
-    window.addEventListener("resize", (e) => {
-      drawGrid(ctx);
-    });
-
-    return () => {
-      // canvas.removeEventListener("mousemove", (e) => {
-      //   listenForCanvasHover(e, ctx, gridData);
-      // });
-      window.removeEventListener("resize", (e) => {
-        drawGrid(ctx);
+    if (gridData)
+      canvas.addEventListener("mousemove", (e) => {
+        listenForCanvasHover(e, ctx, gridData);
       });
-    };
-  }, []);
+    canvas.addEventListener("click", (e) => {
+      listenForCanvasClick(e, ctx, gridData);
+    });
+  }, [gridData]);
 
   useEffect(() => {
     if (ctx === null || !visualisingAlgorithm) return;
@@ -118,6 +112,12 @@ const Grid: React.FC = () => {
           speed,
           ctx,
         }).then(() => dispatch(toggleVisualisingMaze()));
+        break;
+      }
+      case MAZE_STAIR: {
+        stairPattern({ grid: gridData, speed, ctx }).then(() =>
+          dispatch(toggleVisualisingMaze())
+        );
         break;
       }
       default:

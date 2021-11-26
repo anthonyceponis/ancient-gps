@@ -8,25 +8,6 @@
   transition: 0.5s ease;
   overflow-x: hidden;
 
-  &-backdrop {
-    transition: 0.2s ease;
-    pointer-events: auto;
-    position: fixed;
-    top: 75px;
-    left: 0;
-    z-index: 9998;
-    width: 100vw;
-    height: 100vh;
-
-    &-open {
-      background-color: rgba(255, 255, 255, 0.25);
-    }
-
-    &-close {
-      background-color: rgba(255, 255, 255, 0);
-    }
-  }
-
   &-open {
     width: 280px;
   }
