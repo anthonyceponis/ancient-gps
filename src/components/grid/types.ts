@@ -14,6 +14,7 @@ export interface IBox {
   label: NODE_LABELS;
   nodes: string[];
   parent: string | undefined | null;
+  weight: number;
 }
 
 export interface IAnimateBoxFill {

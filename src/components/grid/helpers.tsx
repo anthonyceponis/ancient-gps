@@ -120,6 +120,7 @@ export const generateGridData = (): IGrid => {
         label,
         nodes,
         parent: undefined,
+        weight: 0,
       };
       grid[key] = box;
     }
