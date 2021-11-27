@@ -1,5 +1,3 @@
-import React from "react";
-
 import { IGrid, IAnimateBoxFill } from "../types";
 import {
   BOXES_X,

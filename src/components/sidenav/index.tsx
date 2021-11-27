@@ -33,8 +33,6 @@ export const SideNav: React.FC<{
   open: boolean;
   setOpen: React.Dispatch<boolean>;
 }) => {
-  const algorithm = useSelector(({ Navbar }: IStore) => Navbar.algorithm);
-  const maze = useSelector(({ Navbar }: IStore) => Navbar.maze);
   const speed = useSelector(({ Navbar }: IStore) => Navbar.speed);
 
   const dispatch = useDispatch();
