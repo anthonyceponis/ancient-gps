@@ -8,4 +8,4 @@ Inspired by the ancient greek mythology of 'Theseus and the Minotaur', I impleme
 
 The app is very simple and intuitive to use. Have fun playing around with the settings to see the algorithms in action!
 
-You can access it here (use Google Chrome): <a href="https://anthonyceponis.github.io/ancient-gps" target="_blank">https://anthonyceponis.github.io/ancient-gps</a>
+You can access it here (use Google Chrome): <a href="https://ancient-gps.vercel.app" target="_blank">https://ancient-gps.vercel.app</a>
