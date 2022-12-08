@@ -1,12 +1,12 @@
 export const BLOCK_GRID = "c-grid";
 
-export const GRID_LINES_COLOR = "#192734";
-export const GRID_NODE_UNVISITED_COLOR = "#081419";
-export const GRID_NODE_VISITED_COLOR = "#B0AEB1";
-export const GRID_NODE_SOLUTION_COLOR = "white";
+export const GRID_LINES_COLOR = "rgba(119,119,119, 0.25)";
+export const GRID_NODE_UNVISITED_COLOR = "#fafafc";
+export const GRID_NODE_VISITED_COLOR = "#FF4457";
+export const GRID_NODE_SOLUTION_COLOR = "#B3A6D9";
 export const GRID_START_NODE_COLOR = "white";
 export const GRID_TARGET_NODE_COLOR = "white";
-export const GRID_WALL_NODE_COLOR = "#f4a460";
+export const GRID_WALL_NODE_COLOR = "#0E1921";
 
 export const BOX_SIZE = 26;
 export const BOXES_X = Math.floor(window.innerWidth / BOX_SIZE);

@@ -118,6 +118,7 @@ export const SideNav: React.FC<{
                     Stair Pattern
                   </span>
                 </li>
+                <br />
                 <li>
                   <b>Add wall: </b> <br /> hover + shiftKey
                 </li>

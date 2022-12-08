@@ -1,8 +1,8 @@
 .c-navbar {
   height: 75px;
-  background-color: black;
+  background-color: #fafafc;
   font-family: "Montserrat";
-  color: #fff;
+  color: black;
   padding: 25px;
   display: flex;
   align-items: center;
@@ -32,7 +32,7 @@
       &::after {
         position: absolute;
         content: "";
-        background-color: white;
+        background-color: black;
         width: 30px;
         height: 2px;
         transition: 0.2s ease;
@@ -52,7 +52,7 @@
     &-closed {
       width: 30px;
       height: 2px;
-      background-color: white;
+      background-color: black;
       position: relative;
       transition: 0.2s ease;
 
@@ -60,7 +60,7 @@
       &::after {
         position: absolute;
         content: "";
-        background-color: white;
+        background-color: black;
         width: 30px;
         height: 2px;
         transition: 0.2s ease;

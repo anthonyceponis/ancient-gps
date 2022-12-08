@@ -3,10 +3,11 @@
   right: 0;
   top: 75px;
   height: 100vh;
-  background-color: black;
+  background-color: #fafafc;
   z-index: 9999;
   transition: 0.5s ease;
   overflow-x: hidden;
+  /* border-left: 1px solid #ddd; */
 
   &-open {
     width: 280px;
@@ -29,10 +30,15 @@
     ul {
       list-style-type: none;
       list-style-position: outside;
+      margin-bottom: 30px;
 
       li {
-        padding: 5px;
-        margin: 10px;
+        margin: 7px;
+
+        span {
+          display: block;
+          padding: 7px;
+        }
       }
     }
   }
@@ -44,7 +50,7 @@
 
     &:hover {
       cursor: pointer;
-      background-color: rgba(255, 255, 255, 0.25);
+      background-color: rgb(236, 236, 241);
     }
   }
 
@@ -52,6 +58,6 @@
     padding: 5px;
     border-radius: 7px;
     cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: rgb(236, 236, 241);
   }
 }
