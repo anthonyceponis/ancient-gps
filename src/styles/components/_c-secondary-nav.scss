@@ -1,12 +1,12 @@
 .c-secondary-nav {
-  background-color: black;
+  background-color: #fafafc;
   display: flex;
   flex-direction: column;
   gap: 10px;
   height: 600px;
 
   div {
-    color: white;
+    color: black;
     font-family: "Montserrat";
     display: flex;
     align-items: center;
@@ -20,6 +20,8 @@
       height: 30px;
       display: inline-block;
       padding: 0 !important;
+      border: 1px solid #ddd;
+      border-radius: 5px;
 
       img {
         width: 100%;
