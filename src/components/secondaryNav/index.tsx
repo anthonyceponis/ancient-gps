@@ -6,6 +6,8 @@ import {
   GRID_NODE_VISITED_COLOR,
   GRID_WALL_NODE_COLOR,
   GRID_NODE_SOLUTION_COLOR,
+  GRID_START_NODE_COLOR,
+  GRID_TARGET_NODE_COLOR,
 } from "../grid/constants";
 
 import Bull from "../../images/bullBlack.svg";
@@ -33,13 +35,13 @@ const SecondaryNav: React.FC = () => {
         Solution Node
       </div>
       <div>
-        <div style={{ backgroundColor: GRID_NODE_SOLUTION_COLOR }}>
+        <div style={{ backgroundColor: GRID_START_NODE_COLOR }}>
           <img src={Bull} alt="Bull icon" />
         </div>
         Start Node (Minotaur)
       </div>
       <div>
-        <div style={{ backgroundColor: GRID_NODE_SOLUTION_COLOR }}>
+        <div style={{ backgroundColor: GRID_TARGET_NODE_COLOR }}>
           <img src={Theseus} alt="Theseus icon" />
         </div>
         Target Node (Theseus)
